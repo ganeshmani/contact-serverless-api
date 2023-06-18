@@ -1,0 +1,45 @@
+service: contact-serverless-api
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:PutItem"
+        - "dynamodb:GetItem"
+        - "dynamodb:DeleteItem"
+        - "dynamodb:Scan"
+        - "ses:SendEmail"
+      Resource: "*"
+
+functions:
+  api:
+    handler: src/handler.handler
+    events:
+      - httpApi: "*"
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
+resources:
+  Resources:
+    ContactsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: contacts
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+          - AttributeName: name
+            KeyType: RANGE
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+          - AttributeName: name
+            AttributeType: S
