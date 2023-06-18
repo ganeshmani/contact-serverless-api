@@ -43,3 +43,24 @@ The Contact Serverless API exposes the following endpoints:
 To test the API, you can use tools like cURL or Postman. For example:
 
 - Create a new contact:
+
+curl -X POST -H "Content-Type: application/json" -d '{"name": "John Doe", "email": "john.doe@example.com"}' https://your-api-endpoint/contacts
+
+- Retrieve contact details:
+
+curl https://your-api-endpoint/contacts/{id}
+
+## Contributing
+
+Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
+- The Serverless Framework: [https://www.serverless.com](https://www.serverless.com)
+- AWS Lambda: [https://aws.amazon.com/lambda](https://aws.amazon.com/lambda)
+- AWS DynamoDB: [https://aws.amazon.com/dynamodb](https://aws.amazon.com/dynamodb)
+- AWS SES: [https://aws.amazon.com/ses](https://aws.amazon.com/ses)
